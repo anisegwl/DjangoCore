@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+        }
+        .container {
+            width: 60%;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .question {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .choices {
+            margin: 10px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        button, input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover, input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Quiz Game</h2>
+        <form method="post" action="{% url 'submit_quiz' %}">
+            {% csrf_token %}
+            {% for item in quiz_data %}
+                <p class="question">{{ forloop.counter }}. {{ item.question_text }}</p>
+                <div class="choices">
+                    <label><input type="radio" name="q{{ item.id }}" value="choice_1"> {{ item.choice_1 }}</label>
+                    <label><input type="radio" name="q{{ item.id }}" value="choice_2"> {{ item.choice_2 }}</label>
+                    <label><input type="radio" name="q{{ item.id }}" value="choice_3"> {{ item.choice_3 }}</label>
+                    <label><input type="radio" name="q{{ item.id }}" value="choice_4"> {{ item.choice_4 }}</label>
+                </div>
+            {% endfor %}
+            <input type="submit" value="Submit Quiz">
+        </form>
+    </div>
+</body>
+</html>

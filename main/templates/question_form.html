@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block title %}{% if object %}Edit{% else %}New{% endif %} Question{% endblock %}
+
+
+{% block content %}
+<div class="card shadow">
+   <div class="card-header bg-primary text-white">
+       <h4>{% if object %}Edit Question{% else %}Create New Question{% endif %}</h4>
+   </div>
+  
+   <div class="card-body">
+       <form method="post">
+           {% csrf_token %}
+           {{ form.as_p }}
+           <button type="submit" class="btn btn-primary">Save</button>
+           <a href="{% url 'question_list' %}" class="btn btn-secondary">Cancel</a>
+       </form>
+   </div>
+</div>
+{% endblock %}

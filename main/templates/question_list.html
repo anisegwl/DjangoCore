@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Quiz Questions{% endblock %}
+
+
+{% block content %}
+<div class="card shadow">
+   <div class="card-header bg-primary text-white">
+       <div class="d-flex justify-content-between">
+           <h4>Quiz Questions</h4>
+           <a href="{% url 'question_create' %}" class="btn btn-light">
+               + New Question
+           </a>
+       </div>
+   </div>
+  
+   <div class="card-body">
+       {% for question in object_list %}
+       <div class="border-bottom py-3">
+           <h5>{{ question.question_text }}</h5>
+           <div class="btn-group">
+               <a href="{% url 'question_delete' question.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+               <a href="{% url 'question_update' question.pk %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+           </div>
+       </div>
+       {% empty %}
+       <p class="text-muted">No questions yet</p>
+       {% endfor %}
+    </div>
+ </div>
+ {% endblock %}
+ 
+ 
+ 

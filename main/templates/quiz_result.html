@@ -1,0 +1,11 @@
+{% block content %}
+<div class="container">
+    <h2>Quiz Results</h2>
+    <div class="results-container">
+        <p class="score">
+            You scored {{ score }} out of {{ total }} ({{ percentage }}%)
+        </p>
+        <a href="{% url 'quiz' %}" class="btn-home">Back to Quiz</a>
+    </div>
+</div>
+{% endblock %}

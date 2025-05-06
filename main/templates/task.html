@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Manager</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Task Manager</h2>
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="task" placeholder="Enter task">
+            <button type="submit" name="add">Add Task</button>
+            <button type="submit" name="remove">Remove Task</button>
+        </form>
+        <ul class="task-list">
+            {% for task in tasks %}
+                <li>
+                    <span>{{ forloop.counter }}.</span> {{ task.description }}
+                    <form method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="task_id" value="{{ task.id }}">
+                        <button type="submit" name="remove">delete</button>
+                    </form>
+                </li>
+            {% empty %}
+                <li>No tasks found.</li>
+            {% endfor %}
+        </ul>
+        
+    </div>
+</body>
+</html>
